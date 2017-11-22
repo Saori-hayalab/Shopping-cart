@@ -1,0 +1,182 @@
+box
+
+
+create arry [tabel, chair, PC] <== list of items in shopping cart
+array.remove
+
+newNumberbutton.addEventListener("click", writeNumber)
+clickとCall backを使う
+ボタン作成→クリック→カートからなくなる　＝＝＞Hide？
+ボタン作成→クリック→カートに追加
+
+==========
+let bingoBoxes = document.querySelectorAll('[data-bingo-number]');
+
+function randomNumber() {
+    return Math.floor(Math.random() * 100);
+}
+
+let randomNumberButton = document.getElementById("funButton");
+
+randomNumberButton.addEventListener("click", makeNewBingoBoard);
+
+function makeNewBingoBoard() {
+    for (var i = 0; i < bingoBoxes.length; i++) {
+        bingoBoxes[i].innerHTML = randomNumber();
+    }
+    
+======
+<Shopping cart no javascript>
+- document.querySelector (".aaa") ==> 与えられた CSS セレクタにマッチする文書中の最初の要素（※深さ優先の先行順走査によるもの）を返します
+                                    【訳注: 上記ではクラスセレクタを用いた検索を例示していますが、この様な単発のクラス名の場合は getElementsByClassName() メソッドを
+                                    用いた方が高速な動作となります。また、ID セレクタ ( # ) を対象とする検索も可能ですが、その場合は getElementById() メソッドを用いた方が高速です。
+                                    対象セレクタが流動的である場合や、または隣接セレクタなどによるコンビネーションセレクタでの複雑な検索の場合において、
+                                    querySelector() や querySelectorAll() は真価を発揮します
+                                    
+- event.target             イベントが発生した要素を特定
+- event.current.target ==> イベントは DOM を横断するので、イベントの現在のターゲットを識別します。イベントが発生した要素を特定する event.target とは
+                         対照的に、常にイベントハンドラがアタッチされた要素を参照します。
+                         
+ $("#addTodoButton").on("click", function() {
+  let $imageTag = $("#myImage");         　　　　　　 myImageはHTMLからとっている
+ $imageTag.attr("src", $("#toDoText").val());　　　　
+    });
+    
+    ※　i#mageTag.attr("src", ”URL"）　　　　A①1ttribute（属性）を変えられる。この場合はURLに変更している
+     $("#toDoText")　　
+     ↓　このHTMLからきてる
+     <div class="input-group">
+                    <input id="toDoText" type="text" class="form-control" placeholder="Thing to do" aria-label="Product name">
+                    <span class="input-group-btn">
+        <button id="addTodoButton" class="btn btn-secondary" type="button">Change Image</button>
+        
+      </span>
+      
+      
+      <script>
+$( "button" ).click(function() {
+  $( "p" ).remove();
+});
+</script>
+      
+      event  Jquery
+      
+      $(document).ready(function(){
+    // $("body").css("background-color","#7b4397");
+    let numberOfPhotos = 1;
+    
+    // $("#addPhotoButton").on("click", function(event) {
+        
+    //     let $PhotoRow = $("<tr>");
+    //     let $PhotoNumber = $("<th>");
+    //     $PhotoNumber.text(numberOfPhotos++)
+        
+        
+    //     let $PhotoText = $("<td>");
+    //     $PhotoText.text($("#PhotoText").val());
+        
+    //     // add to table row
+    //     $PhotoRow.append($PhotoNumber);
+    //     $PhotoRow.append($PhotoText);
+        
+    //     let $table = $(".table");
+    //     $table.append($PhotoRow);
+        
+    // });
+    
+    // change url of image
+
+    $("#addPhotoButton").on("click", function() {
+        
+        // duplicate, copy, clones
+        let $pictureContainer = $("#pictureContainer1").clone();
+        
+        // why do this ? Because our query above selects all .pictureContainer
+        // on a click
+        $pictureContainer.removeAttr("id");
+        numberOfPhotos = numberOfPhotos + 1;
+        $pictureContainer.attr("id", "pictureContainer" + numberOfPhotos )
+        // let $imageTagOfPictureContainer = $pictureContainer.find("img");
+        $pictureContainer.attr("src", $("#PhotoURL").val());
+        let $row = $("#manyPictures");
+        $row.append($pictureContainer);
+        $("#PhotoURL").val("");
+        
+        // $imageTag.attr("src", $("#PhotoURL").val());
+    });
+    
+    //  <div class="row">
+   
+    //or this??
+    
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            document.getElementById('blah').src =  e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+
+// <tr>
+//  <th scope="row">1</th>
+//   <td>First thing to do</td>
+// </tr>
+
+
+===============================
+11/16 new thing
+【Object】＞＞情報量が多い場合に使える。Arrayより早い。辞書としても作れる
+let myObject = {};
+let user = {name:"sam", age:24, "likes cats":true}
+console.log(user.name);  //==>> sam
+
+delete user.age;  ==>オブジェクトからUser.ageを消せる　.log(user)してもName
+console.log(user["likes cats]);  >>>" "の場合は[]
+
+user.fb　//デモオブジェクトを設定できる一回設定すれば
+
+習ったこと
+string
+numbers
+booleans
+array
+object
+JSON ==>> JS object notation オブジェクトを他のものに変える
+JSON.string  ==>オブジェクトをStringに変える
+type of を入れると何かがわかる
+JSON.parse
+
+＝＝＝
+function maybeAName () {
+    
+}
+
+// Arrow functions 
+let maybeAnotherName = () => {
+    };
+    
+$(document).ready() =>{
+let url = "https://pokeapi.co/api/v2/pokemon/pikachu/";
+$.ajax(url, {                                // Method=get
+ method:"GET"   //他にはpost,put,deleteがある　$.get(url)でも可能
+ })
+ 
+ 
+ .done((data) => {
+    console.log(data);
+    let sprite = data.sprites.font_default;
+    let $image = $("img")
+    $image.attr("img", sprite);
+    $("body").append($image);
+})
+.fail((err) => {
+    console.log(err);
+})
+
